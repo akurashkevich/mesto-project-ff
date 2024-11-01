@@ -1,35 +1,64 @@
 import './pages/index.css';
 
-import { initialCards } from './scripts/cards.js';
-
-const cardTemplate = document.querySelector('#card-template').content;
+import { initialCards } from './scripts/cards';
+import {createCard, deleteCard} from "./scripts/card";
+import {closeModal, openModal} from "./scripts/modal";
 
 const placesList = document.querySelector('.places__list');
 
-function createCard(initialCard, deleteCard) {
-    const card = cardTemplate.cloneNode(true);
+const popupEdit = document.querySelector('.popup_type_edit');
+const popupNewCard = document.querySelector('.popup_type_new-card');
 
-    const cardImage = card.querySelector('.card__image');
-    const cardTitle = card.querySelector('.card__title');
-    const cardDeleteButton = card.querySelector('.card__delete-button');
+const profileTitle = document.querySelector('.profile__title');
+const profileDescription = document.querySelector('.profile__description');
+const profileEditButton = document.querySelector('.profile__edit-button');
+const profileAddButton = document.querySelector('.profile__add-button');
 
-    cardImage.src = initialCard.link;
-    cardImage.alt = initialCard.name;
-    cardTitle.textContent = initialCard.name;
+const editProfileForm = document.forms.editProfile;
+const editNameInput = editProfileForm.elements.name;
+const editJobInput = editProfileForm.elements.description;
 
-    cardDeleteButton.addEventListener('click', () => {
-        const cardToDelete = cardDeleteButton.closest('.places__item');
-        deleteCard(cardToDelete);
-    });
-
-    return card;
-}
-
-function deleteCard(card) {
-    card.remove();
-}
+const newCardForm = document.forms.newCard;
+const newCardNameInput = newCardForm.elements.name;
+const newCardLinkInput = newCardForm.elements.link;
 
 initialCards.forEach(initialCard => {
     const cardElement = createCard(initialCard, deleteCard);
     placesList.append(cardElement);
 });
+
+profileEditButton.addEventListener('click', () => {
+    openModal(popupEdit);
+    editNameInput.value = profileTitle.textContent;
+    editJobInput.value = profileDescription.textContent;
+});
+
+profileAddButton.addEventListener('click', () => {
+    openModal(popupNewCard);
+});
+
+document.addEventListener('click', function (event) {
+    if (event.target.classList.contains('popup__close')) {
+        const popup = event.target.closest('.popup');
+        if (popup) {
+            closeModal(popup);
+        }
+    }
+});
+
+function handleEditProfileFormSubmit(evt) {
+    evt.preventDefault();
+    profileTitle.textContent = editNameInput.value;
+    profileDescription.textContent = editJobInput.value;
+}
+editProfileForm.addEventListener('submit', handleEditProfileFormSubmit);
+
+function handleNewCardFormSubmit(evt) {
+    evt.preventDefault();
+    const cardElement = createCard({ name: newCardNameInput.value, link: newCardLinkInput.value }, deleteCard);
+    placesList.prepend(cardElement);
+    closeModal(popupNewCard);
+    newCardNameInput.value = '';
+    newCardLinkInput.value = '';
+}
+newCardForm.addEventListener('submit', handleNewCardFormSubmit);
