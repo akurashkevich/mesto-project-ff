@@ -1,7 +1,7 @@
 import './pages/index.css';
 
 import { initialCards } from './scripts/cards';
-import {createCard, deleteCard} from "./scripts/card";
+import {createCard, deleteCard, likeCard} from "./scripts/card";
 import {closeModal, openModal} from "./scripts/modal";
 
 const placesList = document.querySelector('.places__list');
@@ -62,3 +62,5 @@ function handleNewCardFormSubmit(evt) {
     newCardLinkInput.value = '';
 }
 newCardForm.addEventListener('submit', handleNewCardFormSubmit);
+
+placesList.addEventListener('click', likeCard);

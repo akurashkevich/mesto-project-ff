@@ -23,3 +23,10 @@ export function deleteCard(card) {
     card.remove();
 }
 
+export function likeCard(event) {
+    if (event.target.classList.contains('card__like-button')) {
+        const likeButton = event.target.closest('.card__like-button');
+        likeButton.classList.toggle('card__like-button_is-active')
+    }
+}
+
