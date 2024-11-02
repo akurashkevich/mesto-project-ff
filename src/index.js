@@ -1,7 +1,7 @@
 import './pages/index.css';
 
 import { initialCards } from './scripts/cards';
-import { createCard } from "./scripts/card";
+import {createCard, deleteCard, likeCard} from "./scripts/card";
 import {closeModal, onOverlayClick, openModal} from "./scripts/modal";
 
 const placesList = document.querySelector('.places__list');
@@ -30,7 +30,7 @@ const image = popupImage.querySelector('.popup__image');
 const imageCaption = popupImage.querySelector('.popup__caption');
 
 initialCards.forEach(initialCard => {
-    const cardElement = createCard(initialCard);
+    const cardElement = createCard(initialCard, deleteCard, likeCard, openPopupImage);
     placesList.append(cardElement);
 });
 
@@ -68,17 +68,16 @@ editProfileForm.addEventListener('submit', handleEditProfileFormSubmit);
 
 function handleNewCardFormSubmit(evt) {
     evt.preventDefault();
-    const cardElement = createCard({ name: newCardNameInput.value, link: newCardLinkInput.value });
+    const cardElement = createCard({ name: newCardNameInput.value, link: newCardLinkInput.value }, deleteCard, likeCard, openPopupImage);
     placesList.prepend(cardElement);
     closeModal(popupNewCard);
-    newCardNameInput.value = '';
-    newCardLinkInput.value = '';
+    newCardForm.reset();
 }
 newCardForm.addEventListener('submit', handleNewCardFormSubmit);
 
-export function openPopupImage(event) {
+function openPopupImage({ link, name }) {
     openModal(popupImage);
-    image.setAttribute('src', event.target.src);
-    image.setAttribute('alt', event.target.alt);
-    imageCaption.textContent = event.target.alt;
+    image.setAttribute('src', link);
+    image.setAttribute('alt', name);
+    imageCaption.textContent = name;
 }
