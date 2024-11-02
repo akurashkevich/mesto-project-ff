@@ -15,12 +15,12 @@ function onEscapeKeyDown(event) {
 
 export function openModal(popup) {
     popup.classList.add('popup_is-opened');
-    popup.addEventListener('click', onOverlayClick);
+    popup.addEventListener('mousedown', onOverlayClick);
     document.addEventListener('keydown', onEscapeKeyDown);
 }
 
 export function closeModal(popup) {
     popup.classList.remove('popup_is-opened');
-    popup.removeEventListener('click', onOverlayClick);
+    popup.removeEventListener('mousedown', onOverlayClick);
     document.removeEventListener('keydown', onEscapeKeyDown);
 }
