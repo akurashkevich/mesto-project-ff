@@ -15,14 +15,17 @@ const profileDescription = document.querySelector('.profile__description');
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
 
+const editCloseButton = popupEdit.querySelector('.popup__close');
 const editProfileForm = document.forms.editProfile;
 const editNameInput = editProfileForm.elements.name;
 const editJobInput = editProfileForm.elements.description;
 
+const newCardCloseButton = popupNewCard.querySelector('.popup__close');
 const newCardForm = document.forms.newCard;
 const newCardNameInput = newCardForm.elements.name;
 const newCardLinkInput = newCardForm.elements.link;
 
+const imageCloseButton = popupImage.querySelector('.popup__close');
 const image = popupImage.querySelector('.popup__image');
 const imageCaption = popupImage.querySelector('.popup__caption');
 
@@ -41,14 +44,15 @@ profileAddButton.addEventListener('click', () => {
     openModal(popupNewCard);
 });
 
-document.addEventListener('click', function (event) {
-    if (event.target.classList.contains('popup__close')) {
-        const popup = event.target.closest('.popup');
-        if (popup) {
-            closeModal(popup);
-        }
-    }
-});
+function closeButtonListener(button, popup) {
+    button.addEventListener('click', () => {
+        closeModal(popup);
+    });
+}
+
+closeButtonListener(editCloseButton, popupEdit);
+closeButtonListener(newCardCloseButton, popupNewCard);
+closeButtonListener(imageCloseButton, popupImage);
 
 popupEdit.addEventListener('mousedown', onOverlayClick);
 popupNewCard.addEventListener('mousedown', onOverlayClick);
