@@ -1,7 +1,7 @@
 import './pages/index.css';
 
 import { initialCards } from './scripts/cards';
-import {createCard, deleteCard, likeCard} from "./scripts/card";
+import {createCard} from "./scripts/card";
 import {closeModal, openModal} from "./scripts/modal";
 
 const placesList = document.querySelector('.places__list');
@@ -23,7 +23,7 @@ const newCardNameInput = newCardForm.elements.name;
 const newCardLinkInput = newCardForm.elements.link;
 
 initialCards.forEach(initialCard => {
-    const cardElement = createCard(initialCard, deleteCard);
+    const cardElement = createCard(initialCard);
     placesList.append(cardElement);
 });
 
@@ -55,12 +55,10 @@ editProfileForm.addEventListener('submit', handleEditProfileFormSubmit);
 
 function handleNewCardFormSubmit(evt) {
     evt.preventDefault();
-    const cardElement = createCard({ name: newCardNameInput.value, link: newCardLinkInput.value }, deleteCard);
+    const cardElement = createCard({ name: newCardNameInput.value, link: newCardLinkInput.value });
     placesList.prepend(cardElement);
     closeModal(popupNewCard);
     newCardNameInput.value = '';
     newCardLinkInput.value = '';
 }
 newCardForm.addEventListener('submit', handleNewCardFormSubmit);
-
-placesList.addEventListener('click', likeCard);
