@@ -2,7 +2,7 @@ import './pages/index.css';
 
 import { initialCards } from './scripts/cards';
 import { createCard } from "./scripts/card";
-import { closeModal, openModal } from "./scripts/modal";
+import {closeModal, onOverlayClick, openModal} from "./scripts/modal";
 
 const placesList = document.querySelector('.places__list');
 
@@ -49,6 +49,10 @@ document.addEventListener('click', function (event) {
         }
     }
 });
+
+popupEdit.addEventListener('mousedown', onOverlayClick);
+popupNewCard.addEventListener('mousedown', onOverlayClick);
+popupImage.addEventListener('mousedown', onOverlayClick);
 
 function handleEditProfileFormSubmit(evt) {
     evt.preventDefault();
