@@ -54,6 +54,7 @@ function handleEditProfileFormSubmit(evt) {
     evt.preventDefault();
     profileTitle.textContent = editNameInput.value;
     profileDescription.textContent = editJobInput.value;
+    closeModal(popupEdit);
 }
 editProfileForm.addEventListener('submit', handleEditProfileFormSubmit);
 
