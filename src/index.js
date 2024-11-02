@@ -1,13 +1,14 @@
 import './pages/index.css';
 
 import { initialCards } from './scripts/cards';
-import {createCard} from "./scripts/card";
-import {closeModal, openModal} from "./scripts/modal";
+import { createCard } from "./scripts/card";
+import { closeModal, openModal } from "./scripts/modal";
 
 const placesList = document.querySelector('.places__list');
 
 const popupEdit = document.querySelector('.popup_type_edit');
 const popupNewCard = document.querySelector('.popup_type_new-card');
+const popupImage = document.querySelector('.popup_type_image');
 
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
@@ -21,6 +22,9 @@ const editJobInput = editProfileForm.elements.description;
 const newCardForm = document.forms.newCard;
 const newCardNameInput = newCardForm.elements.name;
 const newCardLinkInput = newCardForm.elements.link;
+
+const image = popupImage.querySelector('.popup__image');
+const imageCaption = popupImage.querySelector('.popup__caption');
 
 initialCards.forEach(initialCard => {
     const cardElement = createCard(initialCard);
@@ -62,3 +66,10 @@ function handleNewCardFormSubmit(evt) {
     newCardLinkInput.value = '';
 }
 newCardForm.addEventListener('submit', handleNewCardFormSubmit);
+
+export function openPopupImage(event) {
+    openModal(popupImage);
+    image.setAttribute('src', event.target.src);
+    image.setAttribute('alt', event.target.alt);
+    imageCaption.textContent = event.target.alt;
+}
