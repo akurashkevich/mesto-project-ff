@@ -1,8 +1,9 @@
 import './pages/index.css';
 
-import { initialCards } from './scripts/cards';
+import {initialCards} from './scripts/cards';
 import {createCard, deleteCard, likeCard} from "./scripts/card";
 import {closeModal, onOverlayClick, openModal} from "./scripts/modal";
+import {clearValidation, enableValidation} from "./scripts/validation";
 
 const placesList = document.querySelector('.places__list');
 
@@ -38,10 +39,13 @@ profileEditButton.addEventListener('click', () => {
     openModal(popupEdit);
     editNameInput.value = profileTitle.textContent;
     editJobInput.value = profileDescription.textContent;
+    enableValidation(popupEdit);
+    clearValidation(editProfileForm);
 });
 
 profileAddButton.addEventListener('click', () => {
     openModal(popupNewCard);
+    enableValidation(popupNewCard);
 });
 
 function closeButtonListener(button, popup) {
@@ -64,18 +68,23 @@ function handleEditProfileFormSubmit(evt) {
     profileDescription.textContent = editJobInput.value;
     closeModal(popupEdit);
 }
+
 editProfileForm.addEventListener('submit', handleEditProfileFormSubmit);
 
 function handleNewCardFormSubmit(evt) {
     evt.preventDefault();
-    const cardElement = createCard({ name: newCardNameInput.value, link: newCardLinkInput.value }, deleteCard, likeCard, openPopupImage);
+    const cardElement = createCard({
+        name: newCardNameInput.value,
+        link: newCardLinkInput.value
+    }, deleteCard, likeCard, openPopupImage);
     placesList.prepend(cardElement);
     closeModal(popupNewCard);
     newCardForm.reset();
 }
+
 newCardForm.addEventListener('submit', handleNewCardFormSubmit);
 
-function openPopupImage({ link, name }) {
+function openPopupImage({link, name}) {
     openModal(popupImage);
     image.setAttribute('src', link);
     image.setAttribute('alt', name);
