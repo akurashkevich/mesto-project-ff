@@ -1,23 +1,30 @@
+@import url('-overlay/profile__image-overlay.css');
+
 .profile__image {
-  width: 120px;
-  height: 120px;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  border-radius: 50%;
-  background-size: cover;
-  background-position: center;
-  margin: 0 29px 0 0;
-  background-image: url('/src/images/avatar.jpg');
+    position: relative;
+    width: 120px;
+    height: 120px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    margin: 0 29px 0 0;
+    overflow: hidden;
+}
+
+.profile__image:hover .profile__image-overlay {
+    opacity: 1;
 }
 
 @media screen and (max-width: 740px) {
-  .profile__image {
-    margin: 0 10px 0 0;
-  }
+    .profile__image {
+        margin: 0 10px 0 0;
+    }
 }
 
 @media screen and (max-width: 480px) {
-  .profile__image {
-    margin-right: 0;
-  }
+    .profile__image {
+        margin-right: 0;
+    }
 }
