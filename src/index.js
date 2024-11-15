@@ -53,21 +53,22 @@ Promise.all([getUserInfo(), getInitialCards()])
 
 profileImageOverlay.addEventListener('click', () => {
     openModal(popupEditAvatar);
-    enableValidation(popupEditAvatar);
-})
+});
+enableValidation(popupEditAvatar);
 
 profileEditButton.addEventListener('click', () => {
     openModal(popupEdit);
     editNameInput.value = profileTitle.textContent;
     editDescriptionInput.value = profileDescription.textContent;
-    enableValidation(popupEdit);
     clearValidation(editProfileForm);
 });
+enableValidation(popupEdit);
 
 profileAddButton.addEventListener('click', () => {
     openModal(popupNewCard);
-    enableValidation(popupNewCard);
+
 });
+enableValidation(popupNewCard);
 
 function closeButtonListener(button, popup) {
     button.addEventListener('click', () => {
