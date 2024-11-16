@@ -52,6 +52,7 @@ Promise.all([getUserInfo(), getInitialCards()])
     });
 
 profileImageOverlay.addEventListener('click', () => {
+    clearValidation(popupEditAvatar);
     openModal(popupEditAvatar);
 });
 enableValidation(popupEditAvatar);
@@ -65,8 +66,8 @@ profileEditButton.addEventListener('click', () => {
 enableValidation(popupEdit);
 
 profileAddButton.addEventListener('click', () => {
+    clearValidation(popupNewCard);
     openModal(popupNewCard);
-
 });
 enableValidation(popupNewCard);
 
