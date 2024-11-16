@@ -1,7 +1,7 @@
 import './pages/index.css';
 import {createCard, deleteCard, likeCard} from "./scripts/card";
 import {closeModal, onOverlayClick, openModal} from "./scripts/modal";
-import {clearValidation, enableValidation} from "./scripts/validation";
+import {clearValidation, enableValidation, validationConfig} from "./scripts/validation";
 import {addCard, editAvatar, editUserInfo, getInitialCards, getUserInfo} from "./scripts/api";
 
 const placesList = document.querySelector('.places__list');
@@ -51,25 +51,24 @@ Promise.all([getUserInfo(), getInitialCards()])
         console.log(err);
     });
 
+enableValidation(validationConfig);
+
 profileImageOverlay.addEventListener('click', () => {
-    clearValidation(popupEditAvatar);
+    clearValidation(popupEditAvatar, validationConfig);
     openModal(popupEditAvatar);
 });
-enableValidation(popupEditAvatar);
 
 profileEditButton.addEventListener('click', () => {
     openModal(popupEdit);
     editNameInput.value = profileTitle.textContent;
     editDescriptionInput.value = profileDescription.textContent;
-    clearValidation(editProfileForm);
+    clearValidation(editProfileForm, validationConfig);
 });
-enableValidation(popupEdit);
 
 profileAddButton.addEventListener('click', () => {
-    clearValidation(popupNewCard);
+    clearValidation(popupNewCard, validationConfig);
     openModal(popupNewCard);
 });
-enableValidation(popupNewCard);
 
 function closeButtonListener(button, popup) {
     button.addEventListener('click', () => {
