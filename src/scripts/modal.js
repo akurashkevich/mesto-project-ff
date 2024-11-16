@@ -1,9 +1,3 @@
-export function onOverlayClick(event) {
-    if (event.target === event.currentTarget) {
-        closeModal(event.currentTarget);
-    }
-}
-
 function onEscapeKeyDown(event) {
     if (event.key === 'Escape') {
         const popup = document.querySelector('.popup_is-opened');
