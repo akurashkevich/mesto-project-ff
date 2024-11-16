@@ -47,9 +47,7 @@ Promise.all([getUserInfo(), getInitialCards()])
             placesList.append(cardElement);
         })
     })
-    .catch((err) => {
-        console.log(err);
-    });
+    .catch(console.error);
 
 enableValidation(validationConfig);
 
@@ -94,9 +92,7 @@ function handleFormSubmit(evt, submitHandler) {
     submitButton.textContent = 'Сохранение...';
 
     submitHandler()
-        .catch((err) => {
-            console.error(err);
-        })
+        .catch(console.error)
         .finally(() => {
             submitButton.textContent = initialText;
         });
