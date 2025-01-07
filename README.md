@@ -41,4 +41,4 @@
 
 ## Демо
 
-GitHub Pages: [ссылка](https://w1tcher6479.github.io/mesto-project-ff/).
+GitHub Pages: [ссылка](https://akurashkevich.github.io/mesto-project-ff/).
